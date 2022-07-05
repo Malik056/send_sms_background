@@ -39,6 +39,7 @@ class DashboardController extends ChangeNotifier {
           } else {
             logs.add("${DateTime.now().toIso8601String()} message failed");
           }
+          notifyListeners();
           await http.patch(
             Uri.parse('http://lease-it.herokuapp.com/api/v1/messages'),
             headers: {

@@ -9,7 +9,12 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _DashboardContent();
+    return ChangeNotifierProvider<DashboardController>(
+      create: (context) {
+        return DashboardController();
+      },
+      builder: (BuildContext context, Widget? _) => _DashboardContent(),
+    );
   }
 }
 
@@ -38,19 +43,20 @@ class _DashboardContent extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: controller.logs.length,
+                itemBuilder: (context, index) {
+                  return Text(
+                    controller.logs[index],
+                  );
+                },
+              ),
+            );
           }
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.logs.length,
-              itemBuilder: (context, index) {
-                return Text(
-                  controller.logs[index],
-                );
-              },
-            ),
-          );
         },
       ),
     );
