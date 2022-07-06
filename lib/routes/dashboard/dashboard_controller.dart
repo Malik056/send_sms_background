@@ -11,6 +11,7 @@ import '../../models/message.dart';
 class DashboardController extends ChangeNotifier {
   List<String> logs = [];
   bool isLoading = true;
+  bool hasError = false;
 
   Future<void> init() async {
     try {
